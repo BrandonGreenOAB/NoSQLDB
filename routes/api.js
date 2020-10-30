@@ -4,13 +4,20 @@ const mongojs = require("mongojs");
 
 // get all workouts from the db
 router.get("/api/workouts", (req, res) => {
-  Workout.find({}, (error, data) => {
-    if (error) {
-      res.send(error);
-    } else {
-      res.json(data);
-    }
-  });
+  Workout.find()
+  .then(data => {
+    res.json(data)
+  }).catch(err=>{
+    res.json(err)
+  })
+  // Workout.find({}, (error, data) => {
+  //   if (err) throw err;
+  //   if (error) {
+  //     res.send(error);
+  //   } else {
+  //     res.json(data);
+  //   }
+  // });
 });
 
 // create a workout when selecting "New Workout"
